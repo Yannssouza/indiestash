@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 import com.generation.indiestash.model.Produtos;
 
-public interface PostagemRepository extends JpaRepository<Produtos, Long> {
-    public List<Produtos> findAllByTituloContainingIgnoreCase(@Param("titulo") String titulo);
+public interface ProdutosRepository extends JpaRepository<Produtos, Long> {
+    public List<Produtos> findAllByNomeContainingIgnoreCase(@Param("nome") String nome);
 }

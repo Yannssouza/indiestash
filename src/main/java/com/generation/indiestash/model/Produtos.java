@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.validation.constraints.NotBlank;
@@ -17,58 +19,80 @@ public class Produtos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O atributo titulo é Obrigatório!")
-    @Size(min = 5, max = 100, message = "O atributo titulo deve conter no mínimo 05 e no máximo 100 caracteres")
-    private String titulo;
+    @NotBlank(message = "O atributo nome é Obrigatório!")
+    @Size(min = 5, max = 100, message = "O atributo nome deve conter no mínimo 05 e no máximo 100 caracteres")
+    private String nome;
 
-    @NotBlank(message = "O atributo é Obrigatório!")
-    @Size(min = 1, max = 1000, message = "O atributo texto deve conter no mínimo 10 e no máximo 1000 caracteres")
-    private String texto;
+    @NotBlank(message = "O atributo descrição é Obrigatório!")
+    @Size(min = 1, max = 1000, message = "O atributo descrição deve conter no mínimo 10 e no máximo 1000 caracteres")
+    private String descricao;
+
+    @NotNull(message = "O atributo descrição é Obrigatório!")
+    private Double preco;
+
+    @CreationTimestamp
+    private LocalDateTime dataCriacao;
 
     @UpdateTimestamp
-    private LocalDateTime data;
+    private LocalDateTime dataAtualizacao;
 
     @ManyToOne
-    @JsonIgnoreProperties("postagem")
-    private Tema tema;
+    @JsonIgnoreProperties("produtos")
+    private Categoria categoria;
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getTitulo() {
-        return this.titulo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getTexto() {
-        return this.texto;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public LocalDateTime getData() {
-        return this.data;
+    public Double getPreco() {
+        return preco;
     }
 
-    public void setData(LocalDateTime data) {
-        this.data = data;
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
-    public Tema getTema() {
-        return tema;
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
     }
 
-    public void setTema(Tema tema) {
-        this.tema = tema;
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public LocalDateTime getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
